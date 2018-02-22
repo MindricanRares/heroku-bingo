@@ -3,9 +3,9 @@ import React, { Component } from "react";
 class BingoCard extends Component {
   constructor(props) {
     super(props);
-    this.state={
-      totalScore:props.totalScore
-    }
+    this.state = {
+      totalScore: props.totalScore
+    };
     this.numberOfTimesClicked = 0;
   }
   bingoBtnClick = () => {
@@ -16,28 +16,26 @@ class BingoCard extends Component {
     } else {
     }
   };
-  
 
-  deleteBtnClick = ()=>{
-    if(this.numberOfTimesClicked>0){
-      this.numberOfTimesClicked-=1;
+  deleteBtnClick = () => {
+    if (this.numberOfTimesClicked > 0) {
+      this.numberOfTimesClicked -= 1;
       this.props.removeFromScore();
     }
-  }
-  
+  };
 
   render() {
     return (
-      <div>
-        <button
-          onClick={this.bingoBtnClick.bind(this)}
-          type="button"
-          className="btn btn-default"
-        >
-          This is a test
-        </button>
+      <div className="answercard">
+        <p>{this.props.answer}</p>
         <p>Clicked: {this.numberOfTimesClicked}</p>
-        <button onClick={this.deleteBtnClick} className="btn">Del</button>
+
+        <button onClick={this.bingoBtnClick.bind(this)}  className="btn btn-success">
+          Add
+        </button>
+        <button onClick={this.deleteBtnClick} className="btn btn-danger">
+          Del
+        </button>
       </div>
     );
   }

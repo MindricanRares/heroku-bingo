@@ -23,20 +23,23 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css");
 
 /* The heart of the matter */
 
-.btn-matrix > .btn:nth-child(5n+6) {
+.btn-matrix > .btn:nth-child(5n + 6) {
   clear: left;
   margin-left: 0;
 }
-.btn-matrix > .btn:nth-child(5+4) {
+.btn-matrix > .btn:nth-child(5 + 4) {
   margin-top: -1px;
 }
 .btn-matrix > .btn:first-child {
@@ -56,4 +59,16 @@
 .btn-matrix {
   margin: 20px;
 }
-.btn-matrix { flex-wrap: wrap; }
+.btn-matrix {
+  flex-wrap: wrap;
+}
+
+.answercard {
+  position: relative;
+  float: left;
+  width: 170px;
+  height: 100px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

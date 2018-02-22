@@ -4,38 +4,67 @@ import BingoCard from "./components/bingo-card";
 import ScoreTracker from "./components/score-tracker";
 
 class App extends Component {
+  possibleAnswers = [
+    "1 Know-it-all",
+    "2 Someone is typing",
+    "3 Misuse of words",
+    "4 omeone snezees",
+    "5 Innapropriate name",
+    "6 Foreign accent",
+    "7 Laoud talker",
+    "8 Nothing accomplished",
+    "9 On the same page",
+    "10 Weather mention",
+    "11 Sports mention",
+    "12 No idea what they are talking about",
+    "13 Someone calling from the car",
+    "14 Someone calling from home",
+    "15 Dog barking",
+    "16 Baby crying",
+    "17 Someone typing",
+    "18 Cellphone ringing",
+    "19 Argument",
+    "20 Know it all",
+    "21 Dropped caller",
+    "22 Someone enters late",
+    "23 Some one repeats themselvs",
+    "24 Uncontrollable cough",
+    "25 Win win",
+    "26 Can everyone hear me",
+    "27 Is ____ on the call",
+    "28 Nothing accomplished",
+    "29 Some one has bad reception",
+    "30 Questions avoided",
+    "31 Is everyone here",
+    "32 Soft talker",
+    "33 Talk offline",
+    "34 Can you repeat that"
+  ];
+  constructor() {
+    super();
+    this.state = {
+      totalScore: 0
+    };
+    this.pickAnswers();
+    
+  }
+  answers=[];
+  
+
+  pickAnswers = () => {
+    while (this.answers.length < 25) {
+      var randomnumber = Math.floor(Math.random() * 33) + 1;
+      if (this.answers.indexOf(randomnumber) > -1) continue;
+      this.answers[this.answers.length] =this.possibleAnswers[randomnumber];
+    }
+  };
+  
   createGameBoard = () => {
-    let answers = [
-      "Test_1",
-      "Test_2",
-      "Test_3",
-      "Test_4",
-      "Test_5",
-      "Test_6",
-      "Test_7",
-      "Test_8",
-      "Test_9",
-      "Test10",
-      "Test11",
-      "Test12",
-      "Test13",
-      "Test14",
-      "Test15",
-      "Test16",
-      "Test17",
-      "Test18",
-      "Test19",
-      "Test20",
-      "Test21",
-      "Test22",
-      "Test23",
-      "Test24",
-      "Test25"
-    ];
-    let retvalue = answers.map(answer => {
+    let retvalue = this.answers.map((answer,index) => {
       return (
-        <div key={answer} className="btn btn-default">
+        <div key={index} className="btn btn-default">
           <BingoCard
+            answer={answer}
             totalScore={this.state.totalScore}
             addToScore={this.addToScore}
             removeFromScore={this.removeFromScore}
@@ -46,12 +75,7 @@ class App extends Component {
     return retvalue;
   };
 
-  constructor() {
-    super();
-    this.state = {
-      totalScore: 0
-    };
-  }
+
 
   addToScore = () => {
     this.setState(prevState => ({
@@ -67,7 +91,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App container">
         <ScoreTracker totalScore={this.state.totalScore} />
         <div className="btn-group btn-matrix">{this.createGameBoard()}</div>
       </div>
