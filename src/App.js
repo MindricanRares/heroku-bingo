@@ -59,10 +59,24 @@ class App extends Component {
     this.addToScore.bind(this);
     this.alreadyHasDiagonalBing = false;
     this.alreadyHasInverterdDiagonalBongp = false;
+    this.alreadyHasLineBingo = [false, false, false, false, false];
+    this.alreadyHasColumnBingo = [false, false, false, false, false];
   }
   answers = [];
   alreadyHasDiagonalBingo;
   checkIfBingo() {
+    for (let k = 0; k <= 5; k++) {
+      if (this.alreadyHasLineBingo[k] === false) {
+        this.checkForLineBingo(k);
+      }
+    }
+
+    for (let k = 0; k <= 5; k++) {
+      if (this.alreadyHasColumnBingo[k] === false) {
+        this.checkForColumnBingo(k);
+      }
+    }
+
     if (this.alreadyHasDiagonalBing === false) {
       this.checkForDiagonalBingo();
     }
@@ -71,6 +85,39 @@ class App extends Component {
       this.checkforInvertedDiagonalBingo();
     }
   }
+
+  checkForColumnBingo(k) {
+    let columnHasBingo = true;
+    for (let i = 0; i < 5; i++) {
+      if (this.matrix[i][k] === 0) {
+        columnHasBingo = false;
+      }
+    }
+    if (columnHasBingo === true) {
+      this.setState(prevState => ({
+        totalScore: prevState.totalScore + 500
+      }));
+      console.log(`Bingo on column ${k}`);
+      this.alreadyHasColumnBingo[k] = true;
+    }
+  }
+
+  checkForLineBingo(k) {
+    let lineHasBingo = true;
+    for (let i = 0; i < 5; i++) {
+      if (this.matrix[k][i] === 0) {
+        lineHasBingo = false;
+      }
+    }
+    if (lineHasBingo === true) {
+      console.log(`Bingo on line ${k}`);
+      this.setState(prevState => ({
+        totalScore: prevState.totalScore + 500
+      }));
+      this.alreadyHasLineBingo[k] = true;
+    }
+  }
+
   checkforInvertedDiagonalBingo() {
     let invertedDiagonalBingo = true;
     for (let i = 0; i < 5; i++) {
@@ -80,6 +127,9 @@ class App extends Component {
     }
     if (invertedDiagonalBingo === true) {
       this.alreadyHasInverterdDiagonalBongp = true;
+      this.setState(prevState => ({
+        totalScore: prevState.totalScore + 500
+      }));
       console.log("Bingo");
     }
   }
@@ -92,6 +142,9 @@ class App extends Component {
     }
     if (diagonalBingo === true) {
       this.alreadyHasDiagonalBing = true;
+      this.setState(prevState => ({
+        totalScore: prevState.totalScore + 500
+      }));
       console.log("Bingo");
     }
   }
@@ -137,10 +190,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App container">
+      <div>
         <Header />
-        <ScoreTracker totalScore={this.state.totalScore} />
-        <div className="btn-group btn-matrix">{this.createGameBoard()}</div>
+        <div className="container">
+          <ScoreTracker totalScore={this.state.totalScore} />
+          <div className="btn-group btn-matrix">{this.createGameBoard()}</div>
+        </div>
         <Footer />
       </div>
     );
