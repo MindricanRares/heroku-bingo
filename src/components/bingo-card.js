@@ -10,9 +10,8 @@ class BingoCard extends Component {
   }
   bingoBtnClick = () => {
     if (this.numberOfTimesClicked <= 3) {
-      console.log(this.numberOfTimesClicked);
       this.numberOfTimesClicked += 1;
-      this.props.addToScore();
+      this.props.addToScore(this.props.index);
     } else {
     }
   };
@@ -26,14 +25,14 @@ class BingoCard extends Component {
 
   render() {
     return (
-      <div className="answercard">
+      <div className="answercard">  
         <p>{this.props.answer}</p>
         <p>Clicked: {this.numberOfTimesClicked}</p>
 
-        <button onClick={this.bingoBtnClick.bind(this)}  className="btn btn-success">
+        <button onClick={this.bingoBtnClick.bind(this)}  className="btn btn-success bingo-card">
           Add
         </button>
-        <button onClick={this.deleteBtnClick} className="btn btn-danger">
+        <button onClick={this.deleteBtnClick} className="btn btn-danger bingo-card">
           Del
         </button>
       </div>

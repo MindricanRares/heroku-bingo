@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import BingoCard from "./components/bingo-card";
 import ScoreTracker from "./components/score-tracker";
+import Header from "./components/header";
+import Footer from "./components/footer";
 
 class App extends Component {
   possibleAnswers = [
@@ -40,30 +42,74 @@ class App extends Component {
     "33 Talk offline",
     "34 Can you repeat that"
   ];
+  matrix = [];
   constructor() {
     super();
     this.state = {
       totalScore: 0
     };
     this.pickAnswers();
-    
+    this.matrix = [];
+    for (let i = 0; i < 5; i++) {
+      this.matrix[i] = [];
+      for (let j = 0; j < 5; j++) {
+        this.matrix[i][j] = 0;
+      }
+    }
+    this.addToScore.bind(this);
+    this.alreadyHasDiagonalBing = false;
+    this.alreadyHasInverterdDiagonalBongp = false;
   }
-  answers=[];
-  
+  answers = [];
+  alreadyHasDiagonalBingo;
+  checkIfBingo() {
+    if (this.alreadyHasDiagonalBing === false) {
+      this.checkForDiagonalBingo();
+    }
+
+    if (this.alreadyHasInverterdDiagonalBongp === false) {
+      this.checkforInvertedDiagonalBingo();
+    }
+  }
+  checkforInvertedDiagonalBingo() {
+    let invertedDiagonalBingo = true;
+    for (let i = 0; i < 5; i++) {
+      if (this.matrix[i][4 - i] === 0) {
+        invertedDiagonalBingo = false;
+      }
+    }
+    if (invertedDiagonalBingo === true) {
+      this.alreadyHasInverterdDiagonalBongp = true;
+      console.log("Bingo");
+    }
+  }
+  checkForDiagonalBingo() {
+    let diagonalBingo = true;
+    for (let i = 0; i < 5; i++) {
+      if (this.matrix[i][i] === 0) {
+        diagonalBingo = false;
+      }
+    }
+    if (diagonalBingo === true) {
+      this.alreadyHasDiagonalBing = true;
+      console.log("Bingo");
+    }
+  }
 
   pickAnswers = () => {
     while (this.answers.length < 25) {
       var randomnumber = Math.floor(Math.random() * 33) + 1;
       if (this.answers.indexOf(randomnumber) > -1) continue;
-      this.answers[this.answers.length] =this.possibleAnswers[randomnumber];
+      this.answers[this.answers.length] = this.possibleAnswers[randomnumber];
     }
   };
-  
+
   createGameBoard = () => {
-    let retvalue = this.answers.map((answer,index) => {
+    let retvalue = this.answers.map((answer, index) => {
       return (
         <div key={index} className="btn btn-default">
           <BingoCard
+            index={index}
             answer={answer}
             totalScore={this.state.totalScore}
             addToScore={this.addToScore}
@@ -75,12 +121,12 @@ class App extends Component {
     return retvalue;
   };
 
-
-
-  addToScore = () => {
+  addToScore = index => {
     this.setState(prevState => ({
       totalScore: prevState.totalScore + 100
     }));
+    this.matrix[Math.floor(index / 5)][Math.floor(index % 5)] = 1;
+    this.checkIfBingo();
   };
 
   removeFromScore = () => {
@@ -92,8 +138,10 @@ class App extends Component {
   render() {
     return (
       <div className="App container">
+        <Header />
         <ScoreTracker totalScore={this.state.totalScore} />
         <div className="btn-group btn-matrix">{this.createGameBoard()}</div>
+        <Footer />
       </div>
     );
   }
