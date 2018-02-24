@@ -32,33 +32,39 @@
 }
 
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css");
-
 /* The heart of the matter */
 
-.btn-matrix > .btn:nth-child(5n + 6) {
+.btn-matrix>.btn:nth-child(5n+6) {
   clear: left;
   margin-left: 0;
 }
-.btn-matrix > .btn:nth-child(5 + 4) {
+
+.btn-matrix>.btn:nth-child(5+4) {
   margin-top: -1px;
 }
-.btn-matrix > .btn:first-child {
+
+.btn-matrix>.btn:first-child {
   border-bottom-left-radius: 0;
 }
-.btn-matrix > .btn:nth-child(5) {
+
+.btn-matrix>.btn:nth-child(5) {
   border-top-right-radius: 4px !important;
 }
-.btn-matrix > .btn:nth-last-child(5) {
+
+.btn-matrix>.btn:nth-last-child(5) {
   border-bottom-left-radius: 4px !important;
 }
-.btn-matrix > .btn:last-child {
+
+.btn-matrix>.btn:last-child {
   border-top-right-radius: 0;
 }
 
 /* Decorations */
+
 .btn-matrix {
   margin: 20px;
 }
+
 .btn-matrix {
   flex-wrap: wrap;
 }
@@ -66,18 +72,24 @@
 .answercard {
   position: relative;
   float: left;
-  width: 170px;
-  height: 100px;
+  width: 185px;
+  height: 120px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.bingo-card{
+
+.bingo-card-btn {
   margin: 5px;
 }
 
-header, footer{
+.bingo-card {
+  background-color: yellow
+}
+
+header,
+footer {
   background-color: #333;
   color: #ddd;
   padding: 20px;
@@ -85,6 +97,9 @@ header, footer{
 }
 
 .h1 {
-    margin-top:0;
+  margin-top: 0;
 }
 
+.score-tracker{
+  text-align: center;
+}

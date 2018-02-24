@@ -7,40 +7,40 @@ import Footer from "./components/footer";
 
 class App extends Component {
   possibleAnswers = [
-    "1 Know-it-all",
-    "2 Someone is typing",
-    "3 Misuse of words",
-    "4 omeone snezees",
-    "5 Innapropriate name",
-    "6 Foreign accent",
-    "7 Laoud talker",
-    "8 Nothing accomplished",
-    "9 On the same page",
-    "10 Weather mention",
-    "11 Sports mention",
-    "12 No idea what they are talking about",
-    "13 Someone calling from the car",
-    "14 Someone calling from home",
-    "15 Dog barking",
-    "16 Baby crying",
-    "17 Someone typing",
-    "18 Cellphone ringing",
-    "19 Argument",
-    "20 Know it all",
-    "21 Dropped caller",
-    "22 Someone enters late",
-    "23 Some one repeats themselvs",
-    "24 Uncontrollable cough",
-    "25 Win win",
-    "26 Can everyone hear me",
-    "27 Is ____ on the call",
-    "28 Nothing accomplished",
-    "29 Some one has bad reception",
-    "30 Questions avoided",
-    "31 Is everyone here",
-    "32 Soft talker",
-    "33 Talk offline",
-    "34 Can you repeat that"
+    "Know-it-all",
+    "Someone is typing",
+    "Misuse of words",
+    "Someone snezees",
+    "Innapropriate name",
+    "Foreign accent",
+    "Laoud talker",
+    "Nothing accomplished",
+    "On the same page",
+    "Weather mention",
+    "Sports mention",
+    "No idea what they are talking about",
+    "Someone calling from the car",
+    "Someone calling from home",
+    "Dog barking",
+    "Baby crying",
+    "Someone typing",
+    "Cellphone ringing",
+    "Argument",
+    "Know it all",
+    "Dropped caller",
+    "Someone enters late",
+    "Some one repeats themselvs",
+    "Uncontrollable cough",
+    "Win win",
+    "Can everyone hear me",
+    "Is ____ on the call",
+    "Nothing accomplished",
+    "Some one has bad reception",
+    "Questions avoided",
+    "Is everyone here",
+    "Soft talker",
+    "Talk offline",
+    "Can you repeat that"
   ];
   matrix = [];
   constructor() {
@@ -56,11 +56,17 @@ class App extends Component {
         this.matrix[i][j] = 0;
       }
     }
+
+    this.colorMatrix = [];
+
     this.addToScore.bind(this);
     this.alreadyHasDiagonalBing = false;
     this.alreadyHasInverterdDiagonalBongp = false;
     this.alreadyHasLineBingo = [false, false, false, false, false];
     this.alreadyHasColumnBingo = [false, false, false, false, false];
+
+    this.gameBoard;
+    this.bingoCardBackground = "";
   }
   answers = [];
   alreadyHasDiagonalBingo;
@@ -99,6 +105,7 @@ class App extends Component {
       }));
       console.log(`Bingo on column ${k}`);
       this.alreadyHasColumnBingo[k] = true;
+      this.colorBingoColumn(k);
     }
   }
 
@@ -115,6 +122,7 @@ class App extends Component {
         totalScore: prevState.totalScore + 500
       }));
       this.alreadyHasLineBingo[k] = true;
+      this.colorBingoLine(k);
     }
   }
 
@@ -130,6 +138,7 @@ class App extends Component {
       this.setState(prevState => ({
         totalScore: prevState.totalScore + 500
       }));
+      this.colorInvertedDiagonalBingo();
       console.log("Bingo");
     }
   }
@@ -145,8 +154,41 @@ class App extends Component {
       this.setState(prevState => ({
         totalScore: prevState.totalScore + 500
       }));
+      this.colorDiagonalBingo();
       console.log("Bingo");
     }
+  }
+
+  colorBingoColumn(k) {
+    this.colorMatrix[k] = "bingo-card";
+    this.colorMatrix[k + 5] = "bingo-card";
+    this.colorMatrix[k + 10] = "bingo-card";
+    this.colorMatrix[k + 15] = "bingo-card";
+    this.colorMatrix[k + 20] = "bingo-card";
+  }
+
+  colorBingoLine(k) {
+    this.colorMatrix[5*k] = "bingo-card";
+    this.colorMatrix[5* k + 1] = "bingo-card";
+    this.colorMatrix[5*k + 2] = "bingo-card";
+    this.colorMatrix[5*k + 3] = "bingo-card";
+    this.colorMatrix[5*k + 4] = "bingo-card";
+  }
+
+  colorDiagonalBingo(){
+    this.colorMatrix[0]="bingo-card";
+    this.colorMatrix[6]="bingo-card";
+    this.colorMatrix[12 ]="bingo-card";
+    this.colorMatrix[18]="bingo-card";
+    this.colorMatrix[24]="bingo-card";
+  }
+
+  colorInvertedDiagonalBingo(){
+    this.colorMatrix[4]="bingo-card";
+    this.colorMatrix[8]="bingo-card";
+    this.colorMatrix[12]="bingo-card";
+    this.colorMatrix[16]="bingo-card";
+    this.colorMatrix[20]="bingo-card";
   }
 
   pickAnswers = () => {
@@ -158,10 +200,12 @@ class App extends Component {
   };
 
   createGameBoard = () => {
-    let retvalue = this.answers.map((answer, index) => {
+    // debugger;
+    this.gameBoard = this.answers.map((answer, index) => {
       return (
         <div key={index} className="btn btn-default">
           <BingoCard
+            backGroundColor={this.colorMatrix[index]}
             index={index}
             answer={answer}
             totalScore={this.state.totalScore}
@@ -171,7 +215,7 @@ class App extends Component {
         </div>
       );
     });
-    return retvalue;
+    return this.gameBoard;
   };
 
   addToScore = index => {
