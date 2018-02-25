@@ -65,7 +65,7 @@ class App extends Component {
     this.alreadyHasLineBingo = [false, false, false, false, false];
     this.alreadyHasColumnBingo = [false, false, false, false, false];
 
-    this.gameBoard;
+    // this.gameBoard;
     this.bingoCardBackground = "";
   }
   answers = [];
@@ -193,14 +193,17 @@ class App extends Component {
 
   pickAnswers = () => {
     while (this.answers.length < 25) {
-      var randomnumber = Math.floor(Math.random() * 33) + 1;
-      if (this.answers.indexOf(randomnumber) > -1) continue;
+      var randomnumber = Math.floor(Math.random() * this.possibleAnswers.length) + 1;
+      if (this.answers.indexOf( this.possibleAnswers[randomnumber]) > -1) continue;
+      console.log(randomnumber);
       this.answers[this.answers.length] = this.possibleAnswers[randomnumber];
     }
   };
 
   createGameBoard = () => {
     // debugger;
+    this.answers[12]="Bingo";
+    this.matrix[2][2]=1;
     this.gameBoard = this.answers.map((answer, index) => {
       return (
         <div key={index} className="btn btn-default">

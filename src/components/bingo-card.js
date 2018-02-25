@@ -24,15 +24,28 @@ class BingoCard extends Component {
   };
 
   render() {
+    if (this.props.answer === "Bingo") {
+      return (
+        <div className={`answercard ${this.props.backGroundColor}`}>
+          <h1>{this.props.answer}</h1>
+        </div>
+      );
+    }
     return (
-      <div className={`answercard ${this.props.backGroundColor}`} >  
+      <div className={`answercard ${this.props.backGroundColor}`}>
         <p>{this.props.answer}</p>
         <p>Clicked: {this.numberOfTimesClicked}</p>
 
-        <button onClick={this.bingoBtnClick.bind(this)}  className="btn btn-success bingo-card-btn">
+        <button
+          onClick={this.bingoBtnClick.bind(this)}
+          className="btn btn-success bingo-card-btn"
+        >
           Add
         </button>
-        <button onClick={this.deleteBtnClick} className="btn btn-danger bingo-card-btn">
+        <button
+          onClick={this.deleteBtnClick}
+          className="btn btn-danger bingo-card-btn"
+        >
           Del
         </button>
       </div>

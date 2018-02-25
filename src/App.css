@@ -1,39 +1,3 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-} */
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css");
-/* The heart of the matter */
-
 .btn-matrix>.btn:nth-child(5n+6) {
   clear: left;
   margin-left: 0;
@@ -59,15 +23,6 @@
   border-top-right-radius: 0;
 }
 
-/* Decorations */
-
-.btn-matrix {
-  margin: 20px;
-}
-
-.btn-matrix {
-  flex-wrap: wrap;
-}
 
 .answercard {
   position: relative;
