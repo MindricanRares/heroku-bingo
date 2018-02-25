@@ -1,28 +1,27 @@
-.btn-matrix>.btn:nth-child(5n+6) {
+.btn-matrix > .btn:nth-child(5n + 6) {
   clear: left;
   margin-left: 0;
 }
 
-.btn-matrix>.btn:nth-child(5+4) {
+.btn-matrix > .btn:nth-child(5 + 4) {
   margin-top: -1px;
 }
 
-.btn-matrix>.btn:first-child {
+.btn-matrix > .btn:first-child {
   border-bottom-left-radius: 0;
 }
 
-.btn-matrix>.btn:nth-child(5) {
+.btn-matrix > .btn:nth-child(5) {
   border-top-right-radius: 4px !important;
 }
 
-.btn-matrix>.btn:nth-last-child(5) {
+.btn-matrix > .btn:nth-last-child(5) {
   border-bottom-left-radius: 4px !important;
 }
 
-.btn-matrix>.btn:last-child {
+.btn-matrix > .btn:last-child {
   border-top-right-radius: 0;
 }
-
 
 .answercard {
   position: relative;
@@ -34,13 +33,12 @@
   background-size: cover;
 }
 
-
 .bingo-card-btn {
   margin: 5px;
 }
 
 .bingo-card {
-  background-color: yellow
+  background-color: yellow;
 }
 
 header,
@@ -55,6 +53,6 @@ footer {
   margin-top: 0;
 }
 
-.score-tracker{
+.score-tracker {
   text-align: center;
 }
