@@ -18,7 +18,7 @@ class App extends Component {
     "On the same page",
     "Weather mention",
     "Sports mention",
-    "No idea what they are talking about",
+    "No idea what they are talking",
     "Someone calling from the car",
     "Someone calling from home",
     "Dog barking",
@@ -40,7 +40,13 @@ class App extends Component {
     "Is everyone here",
     "Soft talker",
     "Talk offline",
-    "Can you repeat that"
+    "Can you repeat that",
+    "Any updates",
+    "Testing team",
+    "How are things with _",
+    "Working on it",
+    "No updates",
+    "I`ll take it as a follow up"
   ];
   matrix = [];
   constructor() {
