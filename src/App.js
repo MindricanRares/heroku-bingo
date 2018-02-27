@@ -4,8 +4,7 @@ import BingoCard from "./components/bingo-card";
 import ScoreTracker from "./components/score-tracker";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import SubmitScore from "./components/submit-score";
-import ScoreScreen from "./components/score-screen";
+
 
 class App extends Component {
   possibleAnswers = [
