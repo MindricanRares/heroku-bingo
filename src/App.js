@@ -4,6 +4,8 @@ import BingoCard from "./components/bingo-card";
 import ScoreTracker from "./components/score-tracker";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import SubmitScore from "./components/submit-score";
+import ScoreScreen from "./components/score-screen";
 
 class App extends Component {
   possibleAnswers = [
@@ -11,19 +13,16 @@ class App extends Component {
     "Someone is typing",
     "Misuse of words",
     "Someone snezees",
-    "Innapropriate name",
+    "Innapropriate joke",
     "Foreign accent",
-    "Laoud talker",
+    "Loud talker",
     "Nothing accomplished",
     "On the same page",
     "Weather mention",
     "Sports mention",
-    "No idea what they are talking",
     "Someone calling from the car",
     "Someone calling from home",
     "Dog barking",
-    "Baby crying",
-    "Someone typing",
     "Cellphone ringing",
     "Argument",
     "Know it all",
@@ -46,7 +45,18 @@ class App extends Component {
     "How are things with _",
     "Working on it",
     "No updates",
-    "I`ll take it as a follow up"
+    "I`ll take it as a follow up",
+    "Laughing",
+    "Are you still working on",
+    "Talk to you later",
+    "I`ll run some quick tests",
+    "Sighing",
+    "Can i asign this to you",
+    "What`s the problem",
+    "I will take a look",
+    "Do you need any help",
+    "Can you see my screen",
+    "Backlog mention"
   ];
   matrix = [];
   constructor() {
@@ -174,42 +184,45 @@ class App extends Component {
   }
 
   colorBingoLine(k) {
-    this.colorMatrix[5*k] = "bingo-card";
-    this.colorMatrix[5* k + 1] = "bingo-card";
-    this.colorMatrix[5*k + 2] = "bingo-card";
-    this.colorMatrix[5*k + 3] = "bingo-card";
-    this.colorMatrix[5*k + 4] = "bingo-card";
+    this.colorMatrix[5 * k] = "bingo-card";
+    this.colorMatrix[5 * k + 1] = "bingo-card";
+    this.colorMatrix[5 * k + 2] = "bingo-card";
+    this.colorMatrix[5 * k + 3] = "bingo-card";
+    this.colorMatrix[5 * k + 4] = "bingo-card";
   }
 
-  colorDiagonalBingo(){
-    this.colorMatrix[0]="bingo-card";
-    this.colorMatrix[6]="bingo-card";
-    this.colorMatrix[12 ]="bingo-card";
-    this.colorMatrix[18]="bingo-card";
-    this.colorMatrix[24]="bingo-card";
+  colorDiagonalBingo() {
+    this.colorMatrix[0] = "bingo-card";
+    this.colorMatrix[6] = "bingo-card";
+    this.colorMatrix[12] = "bingo-card";
+    this.colorMatrix[18] = "bingo-card";
+    this.colorMatrix[24] = "bingo-card";
   }
 
-  colorInvertedDiagonalBingo(){
-    this.colorMatrix[4]="bingo-card";
-    this.colorMatrix[8]="bingo-card";
-    this.colorMatrix[12]="bingo-card";
-    this.colorMatrix[16]="bingo-card";
-    this.colorMatrix[20]="bingo-card";
+  colorInvertedDiagonalBingo() {
+    this.colorMatrix[4] = "bingo-card";
+    this.colorMatrix[8] = "bingo-card";
+    this.colorMatrix[12] = "bingo-card";
+    this.colorMatrix[16] = "bingo-card";
+    this.colorMatrix[20] = "bingo-card";
   }
 
   pickAnswers = () => {
+    console.log(`Answers length: ${this.possibleAnswers.length}`);
     while (this.answers.length < 25) {
-      var randomnumber = Math.floor(Math.random() * this.possibleAnswers.length) + 1;
-      if (this.answers.indexOf( this.possibleAnswers[randomnumber]) > -1) continue;
-      console.log(randomnumber);
+      var randomnumber =
+        Math.floor(Math.random() * this.possibleAnswers.length - 1) + 1;
+      if (this.answers.indexOf(this.possibleAnswers[randomnumber]) > -1)
+        continue;
+      console.log(`${randomnumber} , ${this.possibleAnswers[randomnumber]}`);
       this.answers[this.answers.length] = this.possibleAnswers[randomnumber];
     }
   };
 
   createGameBoard = () => {
     // debugger;
-    this.answers[12]="Bingo";
-    this.matrix[2][2]=1;
+    this.answers[12] = "Bingo";
+    this.matrix[2][2] = 1;
     this.gameBoard = this.answers.map((answer, index) => {
       return (
         <div key={index} className="btn btn-default">
@@ -235,7 +248,7 @@ class App extends Component {
     this.checkIfBingo();
   };
 
-  removeFromScore = () => {
+  removeFromScore = index => {
     this.setState(prevState => ({
       totalScore: prevState.totalScore - 100
     }));
@@ -246,7 +259,9 @@ class App extends Component {
       <div>
         <Header />
         <div className="container">
-          <ScoreTracker totalScore={this.state.totalScore} />
+          <div >
+            <ScoreTracker totalScore={this.state.totalScore} />
+          </div>
           <div className="btn-group btn-matrix">{this.createGameBoard()}</div>
         </div>
         <Footer />
