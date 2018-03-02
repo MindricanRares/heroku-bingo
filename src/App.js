@@ -4,7 +4,7 @@ import BingoCard from "./components/bingo-card";
 import ScoreTracker from "./components/score-tracker";
 import Header from "./components/header";
 import Footer from "./components/footer";
-
+import { subscribeToTimer } from "./api";
 
 class App extends Component {
   possibleAnswers = [
@@ -71,6 +71,14 @@ class App extends Component {
         this.matrix[i][j] = 0;
       }
     }
+    subscribeToTimer((err, timestamp) =>
+      this.setState({
+        timestamp
+      })
+    );
+    this.state = {
+      timestamp: "no timestamp yet"
+    };
 
     this.colorMatrix = [];
 
@@ -257,8 +265,9 @@ class App extends Component {
     return (
       <div>
         <Header />
+        <p>This is the timer value: {this.state.timestamp}</p>
         <div className="container">
-          <div >
+          <div>
             <ScoreTracker totalScore={this.state.totalScore} />
           </div>
           <div className="btn-group btn-matrix">{this.createGameBoard()}</div>

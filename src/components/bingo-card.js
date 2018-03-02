@@ -19,7 +19,7 @@ class BingoCard extends Component {
   deleteBtnClick = () => {
     if (this.numberOfTimesClicked > 0) {
       this.numberOfTimesClicked -= 1;
-      this.props.removeFromScore();
+      this.props.removeFromScore(this.props.index);
     }
   };
 
