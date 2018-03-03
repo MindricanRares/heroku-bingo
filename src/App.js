@@ -4,7 +4,8 @@ import BingoCard from "./components/bingo-card";
 import ScoreTracker from "./components/score-tracker";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import { subscribeToTimer } from "./api";
+import { subscribeToResults, submitScore } from "./api";
+import ScoreScreen from "./components/score-screen";
 
 class App extends Component {
   possibleAnswers = [
@@ -61,7 +62,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      totalScore: 0
+      totalScore: 0,
+      scoreResults: []
     };
     this.pickAnswers();
     this.matrix = [];
@@ -71,14 +73,11 @@ class App extends Component {
         this.matrix[i][j] = 0;
       }
     }
-    subscribeToTimer((err, timestamp) =>
+    subscribeToResults((err, scoreResults) =>
       this.setState({
-        timestamp
+        scoreResults
       })
     );
-    this.state = {
-      timestamp: "no timestamp yet"
-    };
 
     this.colorMatrix = [];
 
@@ -248,6 +247,7 @@ class App extends Component {
   };
 
   addToScore = index => {
+    debugger;
     this.setState(prevState => ({
       totalScore: prevState.totalScore + 100
     }));
@@ -261,18 +261,25 @@ class App extends Component {
     }));
   };
 
+  submitScoreBtn = () => {
+    submitScore(this.state.totalScore);
+  };
+
   render() {
     return (
       <div>
         <Header />
-        <p>This is the timer value: {this.state.timestamp}</p>
         <div className="container">
           <div>
             <ScoreTracker totalScore={this.state.totalScore} />
           </div>
           <div className="btn-group btn-matrix">{this.createGameBoard()}</div>
         </div>
-        <Footer />
+        <div className="aside">
+        <button onClick={this.submitScoreBtn}>Submit</button>        
+          <ScoreScreen scoreResults={this.state.scoreResults} />
+        </div>
+        {/* <Footer /> */}
       </div>
     );
   }
