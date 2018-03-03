@@ -1,9 +1,11 @@
 var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
-    io = require('socket.io').listen(server);
-    io.set('origins', '*:*');
-    io.set('match origin protocol', true);
+    io = require('socket.io')({
+      "transports": ["xhr-polling"],
+      "polling duration":10
+    }).listen(server);
+
 let scoreResults=[];
 
 
@@ -25,4 +27,4 @@ io.on('connection', (client) => {
   });
 });
 
-server.listen(  8000);
+server.listen(process.env.PORT || 80);
