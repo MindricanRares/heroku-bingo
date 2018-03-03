@@ -2,7 +2,8 @@ var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
     io = require('socket.io').listen(server);
-
+    io.set('origins', '*:*');
+    io.set('match origin protocol', true);
 let scoreResults=[];
 
 
@@ -24,4 +25,4 @@ io.on('connection', (client) => {
   });
 });
 
-server.listen(8000);
+server.listen(  8000);
