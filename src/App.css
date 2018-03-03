@@ -58,3 +58,19 @@ footer {
 .score-tracker {
   text-align: center;
 }
+
+.scoreResults{
+  max-width: 200px;
+  margin: 5px;
+  display: inline-block;
+}
+.gameBoard{
+  display: inline-block;
+  min-width: 1100px;
+
+}
+
+.score-result-item{
+  max-width: 200px;
+}
+

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-const fs = require('fs');
 class SubmitScore extends Component {
   constructor(props) {
     super(props);
@@ -7,27 +6,29 @@ class SubmitScore extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.hasSubmitedResult=false;
   }
 
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
 
-  handleSubmit(event) {
-    // alert('A name was submitted: ' + this.state.value);
-    let jsonData = JSON.stringify(this.state.value);
-    fs.writeFile("test.txt", jsonData, function(err) {
-        if(err) {
-            return console.log(err);
-        }
-    });
-
-    event.preventDefault();
+  handleSubmit() {
+    this.props.submitBtn(this.state.value);
+    this.hasSubmitedResult=true;
+    this.forceUpdate();
   }
 
   render() {
-    return (
+    if(this.hasSubmitedResult){
+      return(
         <div>
+          <h1>Thanks for playing</h1>
+        </div>
+      )
+    }
+    return (
+        <div className="score-result-item">
         <label>
           Score:
           <input

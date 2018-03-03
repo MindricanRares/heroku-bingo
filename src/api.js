@@ -6,8 +6,8 @@ function subscribeToResults(cb) {
   socket.emit('subscribeToResults', 1000);
 }
 
-function submitScore(totalScore) {
-  socket.emit('chat message',totalScore);
+function submitScore(name,totalScore) {
+  socket.emit('chat message',[name+" : ",totalScore]);
 }
 
 export { subscribeToResults ,submitScore};

@@ -3,9 +3,9 @@ import "./App.css";
 import BingoCard from "./components/bingo-card";
 import ScoreTracker from "./components/score-tracker";
 import Header from "./components/header";
-import Footer from "./components/footer";
 import { subscribeToResults, submitScore } from "./api";
 import ScoreScreen from "./components/score-screen";
+import SubmitScore from "./components/submit-score";
 
 class App extends Component {
   possibleAnswers = [
@@ -260,25 +260,31 @@ class App extends Component {
     }));
   };
 
-  submitScoreBtn = () => {
-    submitScore(this.state.totalScore);
+  submitScoreBtn = name => {
+    submitScore(this.state.totalScore, name);
   };
 
   render() {
     return (
       <div>
         <Header />
-        <div className="container">
-          <div>
-            <ScoreTracker totalScore={this.state.totalScore} />
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-10 gameBoard">
+              <div>
+                <ScoreTracker totalScore={this.state.totalScore} />
+              </div>
+              <div className="btn-group btn-matrix">
+                {this.createGameBoard()}
+              </div>
+              </div>
+
+              <div className="col-2 scoreResults pull-right">
+                <SubmitScore submitBtn={this.submitScoreBtn} />
+                <ScoreScreen scoreResults={this.state.scoreResults} />
+            </div>
           </div>
-          <div className="btn-group btn-matrix">{this.createGameBoard()}</div>
         </div>
-        <div className="aside">
-        <button onClick={this.submitScoreBtn}>Submit</button>        
-          <ScoreScreen scoreResults={this.state.scoreResults} />
-        </div>
-        {/* <Footer /> */}
       </div>
     );
   }
