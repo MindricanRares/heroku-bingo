@@ -15,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "testcafe firefox  src/app.uitest.js --app \"npm start\"",
+    "test": "testcafe firefox  src/tests/*uitest* --app \"npm start\"",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
