@@ -20,6 +20,6 @@ io.on('connection', (client) => {
 });
 
 
-const port = 3000;
+let port = (process.env.PORT || '8000');
 io.listen(port);
 console.log('listening on port ', port);
