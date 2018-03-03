@@ -4,9 +4,19 @@ node_js:
 cache:
   directories:
   - node_modules
+sudo: false
+
+dist: trusty
+
+addons:
+  chrome: stable
+
 script:
-  - npm test
-  - npm run build
+  # Install npm packages
+  - "npm install"
+  # Run TestCafe
+  - "./node_modules/.bin/testcafe 'path:`/usr/bin/google-chrome-stable` --headless --disable-gpu --remote-debugging-port=9222 --remote-debugging-address=0.0.0.0' app.uiuitest.js --skip-js-errors --assertion-timeout 30000"
+
 deploy:
   provider: heroku
   api_key:
