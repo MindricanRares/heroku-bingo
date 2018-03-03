@@ -5,6 +5,8 @@ var express = require('express'),
 
 let scoreResults=[];
 
+
+
 io.on('connection', (client) => {
   client.on('subscribeToResults', (interval) => {
     console.log('client is subscribing to results with interval ', interval);
@@ -22,4 +24,4 @@ io.on('connection', (client) => {
   });
 });
 
-server.listen(process.env.PORT || 3002);
+server.listen(8000);
