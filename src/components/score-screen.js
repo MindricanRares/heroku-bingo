@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 class ScoreScreen extends Component {
   createScoreBoard = () => {
-    debugger;
     let results = this.props.scoreResults.map(score => {
       return <li className="list-group-item">{score}</li>;
     });

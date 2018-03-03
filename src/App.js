@@ -247,7 +247,6 @@ class App extends Component {
   };
 
   addToScore = index => {
-    debugger;
     this.setState(prevState => ({
       totalScore: prevState.totalScore + 100
     }));
