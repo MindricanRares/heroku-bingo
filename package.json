@@ -17,7 +17,7 @@
     "testcafe": "^0.18.6"
   },
   "scripts": {
-    "postinstall": "brunch build -p",
+    "postinstall": "brunch build --production",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "npm-run-all -p -s uitest unittest",
