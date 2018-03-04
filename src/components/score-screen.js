@@ -9,7 +9,7 @@ class ScoreScreen extends Component {
   };
   render() {
     return (
-      <div score-result-item>
+      <div>
         <h1>Results</h1>
         <ul className='list-group score-result-item'>{this.createScoreBoard()}</ul>
       </div>
