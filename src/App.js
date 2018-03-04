@@ -7,6 +7,7 @@ import { subscribeToResults, submitScore } from "./api";
 import ScoreScreen from "./components/score-screen";
 import SubmitScore from "./components/submit-score";
 import pickAnswers from "./apputils";
+import Cookies from 'universal-cookie'
 
 class App extends Component {
 
@@ -16,7 +17,17 @@ class App extends Component {
       totalScore: 0,
       scoreResults: []
     };
-    this.answers = pickAnswers();
+    const cookie = new Cookies();
+    const lastAnswers = cookie.get('answers')
+    if(lastAnswers){
+      this.answers=lastAnswers;
+    }else{
+      this.answers = pickAnswers();
+      cookie.set('answers',this.answers,{
+        path:'/',
+        expires:new Date(new Date().getTime() + 120*60000)
+      });
+    }
     this.matrix = [];
     for (let i = 0; i < 5; i++) {
       this.matrix[i] = [];
