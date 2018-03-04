@@ -28,16 +28,16 @@ class SubmitScore extends Component {
       )
     }
     return (
-        <div className="score-result-item">
+      <div className='score-result-item'>
         <label>
           Score:
           <input
-            type="text"
+            type='text'
             value={this.state.value}
             onChange={this.handleChange}
           />
         </label>
-        <button type="button" className="btn btn-default" onClick={this.handleSubmit}>Submit</button>
+        <button type='button' className='btn btn-default' onClick={this.handleSubmit}>Submit</button>
       </div>
     );
   }

@@ -37,12 +37,8 @@ class App extends Component {
     this.alreadyHasInverterdDiagonalBongp = false;
     this.alreadyHasLineBingo = [false, false, false, false, false];
     this.alreadyHasColumnBingo = [false, false, false, false, false];
-
-    // this.gameBoard;
     this.bingoCardBackground = "";
   }
-  answers = [];
-  alreadyHasDiagonalBingo;
   checkIfBingo() {
     for (let k = 0; k <= 5; k++) {
       if (this.alreadyHasLineBingo[k] === false) {
@@ -171,7 +167,7 @@ class App extends Component {
     this.matrix[2][2] = 1;
     this.gameBoard = this.answers.map((answer, index) => {
       return (
-        <div key={index} className="btn btn-default">
+        <div key={index} className='btn btn-default'>
           <BingoCard
             backGroundColor={this.colorMatrix[index]}
             index={index}
@@ -208,20 +204,19 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-10 gameBoard">
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col-10 gameBoard'>
               <div>
                 <ScoreTracker totalScore={this.state.totalScore} />
               </div>
-              <div className="btn-group btn-matrix">
+              <div className='btn-group btn-matrix'>
                 {this.createGameBoard()}
               </div>
-              </div>
-
-              <div className="col-2 scoreResults pull-right">
-                <SubmitScore submitBtn={this.submitScoreBtn} />
-                <ScoreScreen scoreResults={this.state.scoreResults} />
+            </div>
+            <div className='col-2 scoreResults pull-right'>
+              <SubmitScore submitBtn={this.submitScoreBtn} />
+              <ScoreScreen scoreResults={this.state.scoreResults} />
             </div>
           </div>
         </div>

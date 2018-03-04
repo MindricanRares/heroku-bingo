@@ -37,14 +37,14 @@ class BingoCard extends Component {
         <p>Clicked: {this.numberOfTimesClicked}</p>
 
         <button
-          onClick={this.bingoBtnClick.bind(this)}
-          className="btn btn-success bingo-card-btn"
+          onClick={this.bingoBtnClick}
+          className='btn btn-success bingo-card-btn'
         >
           Add
         </button>
         <button
           onClick={this.deleteBtnClick}
-          className="btn btn-danger bingo-card-btn"
+          className='btn btn-danger bingo-card-btn'
         >
           Del
         </button>
