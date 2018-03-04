@@ -15,10 +15,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "testcafe firefox  src/tests/*uitest* --app \"npm start\"",
+    "test":"npm-run-all -p -s uitest unittest",
+    "uitest": "testcafe firefox  src/tests/*uitest* --app \"npm start\"",
+    "unittest":"jest",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "css-loader": "^0.28.9"
+    "css-loader": "^0.28.9",
+    "jest": "^22.4.2",
+    "npm-run-all": "^4.1.2"
   }
 }
