@@ -10,7 +10,6 @@ import pickAnswers from "./apputils";
 
 class App extends Component {
 
-  matrix = [];
   constructor() {
     super();
     this.state = {

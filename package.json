@@ -18,12 +18,15 @@
     "test": "npm-run-all -p -s uitest unittest",
     "uitest": "testcafe firefox  src/tests/*uitest* --app \"npm start\"",
     "unittest": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "esw src"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^22.4.1",
     "css-loader": "^0.28.9",
+    "eslint": "^4.18.2",
+    "eslint-watch": "^3.1.3",
     "jest": "^22.4.2",
     "npm-run-all": "^4.1.2",
     "regenerator-runtime": "^0.11.1"
