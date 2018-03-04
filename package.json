@@ -15,14 +15,17 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test":"npm-run-all -p -s uitest unittest",
+    "test": "npm-run-all -p -s uitest unittest",
     "uitest": "testcafe firefox  src/tests/*uitest* --app \"npm start\"",
-    "unittest":"jest",
+    "unittest": "jest",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.1",
     "css-loader": "^0.28.9",
     "jest": "^22.4.2",
-    "npm-run-all": "^4.1.2"
+    "npm-run-all": "^4.1.2",
+    "regenerator-runtime": "^0.11.1"
   }
 }
