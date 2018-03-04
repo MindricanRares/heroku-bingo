@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "statik": ">= 1.1.0",
+    "brunch": "1.x",
     "babel-eslint": "^8.2.2",
     "eslint-config-standard-jsx": "^5.0.0",
     "express": "^4.15.2",
@@ -15,6 +17,7 @@
     "testcafe": "^0.18.6"
   },
   "scripts": {
+    "postinstall": "brunch build -p",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "npm-run-all -p -s uitest unittest",
