@@ -30,7 +30,7 @@ class SubmitScore extends Component {
     return (
       <div className='score-result-item'>
         <label>
-          Score:
+          Name:
           <input
             type='text'
             value={this.state.value}
