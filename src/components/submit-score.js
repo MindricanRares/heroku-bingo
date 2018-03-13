@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 class SubmitScore extends Component {
   constructor(props) {
@@ -13,10 +14,20 @@ class SubmitScore extends Component {
     this.setState({ value: event.target.value });
   }
 
+  validateName(name) {
+    return /^[A-Za-z\s]+$/.test(name);
+  }
+
   handleSubmit() {
-    this.props.submitBtn(this.state.value);
-    this.hasSubmitedResult=true;
-    this.forceUpdate();
+    debugger;
+
+    if(this.validateName(this.state.value)){
+      this.props.submitBtn(this.state.value);
+      this.hasSubmitedResult=true;
+      this.forceUpdate();
+    }else{
+      alert("wrong fromat")
+    }
   }
 
   render() {

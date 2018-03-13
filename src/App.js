@@ -350,7 +350,7 @@ class App extends Component {
       )
     }else{
       return(
-        <p>You and {this.state.numberOfPlayers-1} more pla are participating in this game</p>
+        <p>You and {this.state.numberOfPlayers-1} more players are participating in this game</p>
       )
     }
   }

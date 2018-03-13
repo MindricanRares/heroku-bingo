@@ -58,4 +58,8 @@ function pickAnswers() {
   }
   return answers;
 };
-export default pickAnswers;
+
+
+
+
+export default {pickAnswers};
