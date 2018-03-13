@@ -3,7 +3,7 @@ import "./App.css";
 import BingoCard from "./components/bingo-card";
 import ScoreTracker from "./components/score-tracker";
 import Header from "./components/header";
-import { subscribeToResults, submitScore } from "./api";
+import { subscribeToResults, submitScore, showNumberOfPlayers } from "./api";
 import ScoreScreen from "./components/score-screen";
 import SubmitScore from "./components/submit-score";
 import pickAnswers from "./apputils";
@@ -15,7 +15,8 @@ class App extends Component {
     super();
     this.state = {
       totalScore: 0,
-      scoreResults: []
+      scoreResults: [],
+      numberOfPlayers:0
     };
     const cookie = new Cookies();
     const lastAnswers = cookie.get('answers')
@@ -40,6 +41,12 @@ class App extends Component {
         scoreResults
       })
     );
+    showNumberOfPlayers ((err, numberOfPlayers) =>
+      this.setState({
+        numberOfPlayers
+      })
+    );
+
 
     this.colorMatrix = [];
 
@@ -124,7 +131,7 @@ class App extends Component {
       }));
       console.log(`Bingo lost on column ${k}`);
       this.alreadyHasColumnBingo[k] = true;
-      this.colorBingoColumn(k);
+      this.unColorBingoColumn(k);
     }
   }
   checkForLineBingo(k) {
@@ -157,7 +164,7 @@ class App extends Component {
         totalScore: prevState.totalScore - 500
       }));
       this.alreadyHasLineBingo[k] = false;
-      this.colorBingoLine(k);
+      this.unColorBingoLine(k);
     }
   }
 
@@ -189,7 +196,7 @@ class App extends Component {
       this.setState(prevState => ({
         totalScore: prevState.totalScore - 500
       }));
-      this.colorInvertedDiagonalBingo();
+      this.unColorInvertedDiagonalBingo();
       console.log("Bingo");
     }
   }
@@ -221,11 +228,42 @@ class App extends Component {
       this.setState(prevState => ({
         totalScore: prevState.totalScore - 500
       }));
-      this.colorDiagonalBingo();
+      this.unColorDiagonalBingo();
       console.log("Bingo");
     }
   }
 
+  unColorBingoColumn(k) {
+    this.colorMatrix[k] = "";
+    this.colorMatrix[k + 5] = "";
+    this.colorMatrix[k + 10] = "";
+    this.colorMatrix[k + 15] = "";
+    this.colorMatrix[k + 20] = "";
+  }
+
+  unColorBingoLine(k) {
+    this.colorMatrix[5 * k] = "";
+    this.colorMatrix[5 * k + 1] = "";
+    this.colorMatrix[5 * k + 2] = "";
+    this.colorMatrix[5 * k + 3] = "";
+    this.colorMatrix[5 * k + 4] = "";
+  }
+
+  unColorDiagonalBingo() {
+    this.colorMatrix[0] = "";
+    this.colorMatrix[6] = "";
+    this.colorMatrix[12] = "";
+    this.colorMatrix[18] = "";
+    this.colorMatrix[24] = "";
+  }
+
+  unColorInvertedDiagonalBingo() {
+    this.colorMatrix[4] = "";
+    this.colorMatrix[8] = "";
+    this.colorMatrix[12] = "";
+    this.colorMatrix[16] = "";
+    this.colorMatrix[20] = "";
+  }
   colorBingoColumn(k) {
     this.colorMatrix[k] = "bingo-card";
     this.colorMatrix[k + 5] = "bingo-card";
@@ -301,6 +339,22 @@ class App extends Component {
     submitScore(this.state.totalScore, name);
   };
 
+  displayNumberOfPlayers =()=>{
+    if(this.state.numberOfPlayers===1){
+      return(
+        <p>You are playing alone</p>
+      )
+    }else if(this.state.numberOfPlayers===2){
+      return(
+        <p>You and another player are participating in this game</p>
+      )
+    }else{
+      return(
+        <p>You and {this.state.numberOfPlayers-1} more pla are participating in this game</p>
+      )
+    }
+  }
+
   render() {
     return (
       <div>
@@ -319,6 +373,7 @@ class App extends Component {
               <SubmitScore submitBtn={this.submitScoreBtn} />
               <ScoreScreen scoreResults={this.state.scoreResults} />
             </div>
+            {this.displayNumberOfPlayers()}
           </div>
         </div>
       </div>

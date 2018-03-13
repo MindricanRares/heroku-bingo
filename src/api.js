@@ -10,4 +10,9 @@ function submitScore(name,totalScore) {
   socket.emit('chat message',[name+" : ",totalScore]);
 }
 
-export { subscribeToResults ,submitScore};
+function showNumberOfPlayers(cb) {
+  socket.on('numberOfPlayer', numberOfPlayers => cb(null, numberOfPlayers));
+  socket.emit('showNumberOfPlayers', 1000);
+}
+
+export { subscribeToResults ,submitScore,showNumberOfPlayers};
