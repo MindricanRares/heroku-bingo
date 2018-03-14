@@ -6,8 +6,8 @@ import Header from "./components/header";
 import { subscribeToResults, submitScore, showNumberOfPlayers } from "./api";
 import ScoreScreen from "./components/score-screen";
 import SubmitScore from "./components/submit-score";
-import pickAnswers from "./apputils";
 import Cookies from 'universal-cookie'
+import pickAnswers from "./apputils";
 
 class App extends Component {
 
@@ -340,7 +340,7 @@ class App extends Component {
   };
 
   displayNumberOfPlayers =()=>{
-    if(this.state.numberOfPlayers===1){
+    if(this.state.numberOfPlayers<2){
       return(
         <p>You are playing alone</p>
       )
