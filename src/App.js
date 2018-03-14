@@ -342,15 +342,15 @@ class App extends Component {
   displayNumberOfPlayers =()=>{
     if(this.state.numberOfPlayers<2){
       return(
-        <p>You are playing alone</p>
+        <h2>You are playing alone</h2>
       )
     }else if(this.state.numberOfPlayers===2){
       return(
-        <p>You and another player are participating in this game</p>
+        <h2>You and another player are participating in this game</h2>
       )
     }else{
       return(
-        <p>You and {this.state.numberOfPlayers-1} more players are participating in this game</p>
+        <h2>You and {this.state.numberOfPlayers-1} more players are participating in this game</h2>
       )
     }
   }
