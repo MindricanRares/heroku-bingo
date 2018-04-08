@@ -19,15 +19,9 @@ class SubmitScore extends Component {
   }
 
   handleSubmit() {
-    debugger;
-
-    if(this.validateName(this.state.value)){
-      this.props.submitBtn(this.state.value);
-      this.hasSubmitedResult=true;
-      this.forceUpdate();
-    }else{
-      alert("wrong fromat")
-    }
+    this.props.submitBtn();
+    this.hasSubmitedResult=true;
+    this.forceUpdate();
   }
 
   render() {
@@ -40,14 +34,7 @@ class SubmitScore extends Component {
     }
     return (
       <div className='score-result-item'>
-        <label>
-          Name:
-          <input
-            type='text'
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-        </label>
+        <h1>Player name: {this.props.playerName}</h1>
         <button type='button' className='btn btn-default' onClick={this.handleSubmit}>Submit</button>
       </div>
     );
