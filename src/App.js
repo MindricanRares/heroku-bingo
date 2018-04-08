@@ -14,6 +14,7 @@ const centerIndexColumn=2;
 const centerIndexRow=2;
 const wildCard=1;
 const cookie = new Cookies();
+
 class App extends Component {
 
   constructor() {
@@ -73,15 +74,15 @@ class App extends Component {
 
   subscribeToSocketIo=()=>{
     subscribeToResults((err, scoreResults) =>
-    this.setState({
-      scoreResults
-    })
-  );
-  showNumberOfPlayers ((err, numberOfPlayers) =>
-    this.setState({
-      numberOfPlayers
-    })
-  );
+      this.setState({
+        scoreResults
+      })
+    );
+    showNumberOfPlayers ((err, numberOfPlayers) =>
+      this.setState({
+        numberOfPlayers
+      })
+    );
   }
 
   settingUpBingoBoard=()=>{
@@ -236,6 +237,7 @@ class App extends Component {
       console.log("Bingo");
     }
   }
+
   checkForDiagonalBingo() {
     let diagonalBingo = true;
     for (let i = 0; i < 5; i++) {
@@ -252,6 +254,7 @@ class App extends Component {
       console.log("Bingo");
     }
   }
+
   checkForDiagonalBingoLoss() {
     let diagonalBingo = false;
     for (let i = 0; i < 5; i++) {
@@ -360,7 +363,6 @@ class App extends Component {
     this.checkIfBingo();
   };
 
-
   removeFromScore = index => {
     this.setState(prevState => ({
       totalScore: prevState.totalScore - 100
@@ -388,7 +390,6 @@ class App extends Component {
       )
     }
   }
-
 
   getNameFromModal=(name)=> {
     this.setState({ show: false });

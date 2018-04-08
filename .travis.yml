@@ -17,7 +17,7 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3
   - fluxbox >/dev/null 2>&1 &
-script: npm run lint
+script: npm run test
 deploy:
   provider: heroku
   api_key:
