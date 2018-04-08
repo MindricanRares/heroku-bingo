@@ -3,6 +3,11 @@ import { Selector } from "testcafe";
 fixture`Testing bingo card`.page`http://localhost:3000/`;
 
 test("ShouldNotLetCardHaveMoreThan5Clicks", async t => {
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const addButton = Selector(
     "#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div > button.btn.btn-success.bingo-card-btn"
   );
@@ -19,6 +24,11 @@ test("ShouldNotLetCardHaveMoreThan5Clicks", async t => {
 });
 
 test("ShouldNotLetCardHaveNegativeClicks", async t => {
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const addButton = Selector(
     "#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div > button.btn.btn-success.bingo-card-btn"
   );
@@ -37,6 +47,11 @@ test("ShouldNotLetCardHaveNegativeClicks", async t => {
 });
 
 test("ShouldHaveNoUndefinedAnswer", async t => {
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   for (let i = 1; i < 25; i++) {
     if (i != 13) {
       await t.expect(
@@ -49,6 +64,11 @@ test("ShouldHaveNoUndefinedAnswer", async t => {
 });
 
 test("ShouldHaveBingoCardInTheMiddle", async t => {
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const bingoCard = Selector(
     "#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(13) > div > h1"
   );
@@ -56,6 +76,11 @@ test("ShouldHaveBingoCardInTheMiddle", async t => {
 });
 
 test('ShouldColourBingoLineInYellow',async t =>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const firstBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div');
   const secondBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(6) > div');
   const thirdBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(11) > div');
@@ -84,6 +109,11 @@ test('ShouldColourBingoLineInYellow',async t =>{
   await t.expect(fifthBingoCard.hasClass('bingo-card')).eql(true);
 })
 test('ShouldColourBingoColumnInYellow',async t =>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const firstBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div');
   const secondBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(2) > div');
   const thirdBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(3) > div');
@@ -112,6 +142,11 @@ test('ShouldColourBingoColumnInYellow',async t =>{
   await t.expect(fifthBingoCard.hasClass('bingo-card')).eql(true);
 })
 test('ShouldColourBingoDiagonalInYellow',async t =>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const firstBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div');
   const secondBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(7) > div');
   const forthBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(19) > div');
@@ -135,6 +170,11 @@ test('ShouldColourBingoDiagonalInYellow',async t =>{
   await t.expect(fifthBingoCard.hasClass('bingo-card')).eql(true);
 })
 test('ShouldColourBingoInvertedDiagonalInYellow',async t =>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const firstBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(5) > div');
   const secondBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(9) > div');
   const forthBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(17) > div');
@@ -159,6 +199,11 @@ test('ShouldColourBingoInvertedDiagonalInYellow',async t =>{
 })
 
 test('ShouldUncolourBingoColumnInYellow',async t =>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const firstBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div');
   const secondBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(2) > div');
   const thirdBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(3) > div');
@@ -195,6 +240,11 @@ test('ShouldUncolourBingoColumnInYellow',async t =>{
 })
 
 test('ShouldUncolourBingoLineInYellow',async t =>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const firstBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div');
   const secondBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(6) > div');
   const thirdBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(11) > div');
@@ -230,6 +280,11 @@ test('ShouldUncolourBingoLineInYellow',async t =>{
   await t.expect(fifthBingoCard.hasClass('bingo-card')).eql(false);
 })
 test('ShouldUncolourBingoDiagonalInYellow',async t =>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const firstBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div');
   const secondBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(7) > div');
   const forthBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(19) > div');
@@ -259,6 +314,11 @@ test('ShouldUncolourBingoDiagonalInYellow',async t =>{
   await t.expect(fifthBingoCard.hasClass('bingo-card')).eql(false);
 })
 test('ShouldUncolourBingoInvertedDiagonalInYellow',async t =>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const firstBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(5) > div');
   const secondBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(9) > div');
   const forthBingoCard=Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(17) > div');

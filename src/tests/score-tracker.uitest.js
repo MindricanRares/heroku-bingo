@@ -4,6 +4,11 @@ fixture `Testing score tracker`
     .page `http://localhost:3000/`;
 
 test('ShouldAddScoreFromOneCard', async t => {
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
     const score= Selector('#root > div > div > div > div.col-10.gameBoard > div:nth-child(1) > div > h3');
     await t.expect(score.innerText).eql('The total score is :0');
     const addButton = Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div > button.btn.btn-success.bingo-card-btn');
@@ -12,6 +17,11 @@ test('ShouldAddScoreFromOneCard', async t => {
 });
 
 test('ShouldRemoveBingoBonusIfPlayerNoLongerHasLineBingo',async t=>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const totalScore=Selector('#root > div > div > div > div.col-10.gameBoard > div:nth-child(1) > div > h3');
   const firstElement = Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div > button.btn.btn-success.bingo-card-btn');
   const secondElement = Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(6) > div > button.btn.btn-success.bingo-card-btn');
@@ -31,6 +41,11 @@ test('ShouldRemoveBingoBonusIfPlayerNoLongerHasLineBingo',async t=>{
 })
 
 test('ShouldRemoveBingoBonusIfPlayerNoLongerHasColumnBingo',async t=>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const totalScore=Selector('#root > div > div > div > div.col-10.gameBoard > div:nth-child(1) > div > h3');
   const firstElement = Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div > button.btn.btn-success.bingo-card-btn');
   const secondElement = Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(2) > div > button.btn.btn-success.bingo-card-btn');
@@ -50,6 +65,11 @@ test('ShouldRemoveBingoBonusIfPlayerNoLongerHasColumnBingo',async t=>{
 })
 
 test('ShouldRemoveBingoBonusIfPlayerNoLongerHasDiagonalBingo',async t=>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const totalScore=Selector('#root > div > div > div > div.col-10.gameBoard > div:nth-child(1) > div > h3');
   const firstElement = Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(1) > div > button.btn.btn-success.bingo-card-btn');
   const secondElement = Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(7) > div > button.btn.btn-success.bingo-card-btn');
@@ -67,6 +87,11 @@ test('ShouldRemoveBingoBonusIfPlayerNoLongerHasDiagonalBingo',async t=>{
 })
 
 test('ShouldRemoveBingoBonusIfPlayerNoLongerHasInvertedBingo',async t=>{
+  const name=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-body > input');
+  await t.typeText(name,'TestCafeUser');
+  const nameModalBtn=Selector('body > div:nth-child(4) > div.fade.in.modal > div > div > div.modal-footer > button');
+  await t.click(nameModalBtn);
+
   const totalScore=Selector('#root > div > div > div > div.col-10.gameBoard > div:nth-child(1) > div > h3');
   const firstElement = Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(5) > div > button.btn.btn-success.bingo-card-btn');
   const secondElement = Selector('#root > div > div > div > div.col-10.gameBoard > div.btn-group.btn-matrix > div:nth-child(9) > div > button.btn.btn-success.bingo-card-btn');

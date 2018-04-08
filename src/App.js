@@ -10,13 +10,42 @@ import Cookies from 'universal-cookie'
 import pickAnswers from "./apputils";
 import NameModal from "./components/name-modal";
 
+const centerIndexColumn=2;
+const centerIndexRow=2;
+const wildCard=1;
 const cookie = new Cookies();
 class App extends Component {
 
   constructor() {
     super();
+    const nameCookieResult=this.checkForNameCookie();
+    //Show propriety needs to be decided before setting the component state
+    this.state = {
+      totalScore: 0,
+      scoreResults: [],
+      numberOfPlayers:0,
+      show:nameCookieResult.modalIsVisible,
+      playerName:nameCookieResult.playerName
+    };
+    this.checkForAnswersCookie();
+    this.subscribeToSocketIo();
+    this.intializeScoreMatrixWithZeroes();
+    this.settingUpBingoBoard();
+  }
 
-    debugger;
+
+
+  intializeScoreMatrixWithZeroes=()=>{
+    this.matrix = [];
+    for (let i = 0; i < 5; i++) {
+      this.matrix[i] = [];
+      for (let j = 0; j < 5; j++) {
+        this.matrix[i][j] = 0;
+      }
+    }
+  }
+
+  checkForNameCookie=()=>{
     let modalIsVisible=false;
     let playerName="";
 
@@ -26,15 +55,10 @@ class App extends Component {
     }else{
       modalIsVisible=true;
     }
+    return{playerName,modalIsVisible}
+  }
 
-    this.state = {
-      totalScore: 0,
-      scoreResults: [],
-      numberOfPlayers:0,
-      show:modalIsVisible,
-      playerName:playerName
-    };
-
+  checkForAnswersCookie=()=>{
     const lastAnswers = cookie.get('answers')
     if(lastAnswers){
       this.answers=lastAnswers;
@@ -45,35 +69,30 @@ class App extends Component {
         expires:new Date(new Date().getTime() + 120*60000)
       });
     }
+  }
 
-    this.matrix = [];
-    for (let i = 0; i < 5; i++) {
-      this.matrix[i] = [];
-      for (let j = 0; j < 5; j++) {
-        this.matrix[i][j] = 0;
-      }
-    }
+  subscribeToSocketIo=()=>{
     subscribeToResults((err, scoreResults) =>
-      this.setState({
-        scoreResults
-      })
-    );
-    showNumberOfPlayers ((err, numberOfPlayers) =>
-      this.setState({
-        numberOfPlayers
-      })
-    );
+    this.setState({
+      scoreResults
+    })
+  );
+  showNumberOfPlayers ((err, numberOfPlayers) =>
+    this.setState({
+      numberOfPlayers
+    })
+  );
+  }
 
-
+  settingUpBingoBoard=()=>{
     this.colorMatrix = [];
-
-    this.addToScore.bind(this);
     this.alreadyHasDiagonalBing = false;
     this.alreadyHasInverterdDiagonalBongp = false;
     this.alreadyHasLineBingo = [false, false, false, false, false];
     this.alreadyHasColumnBingo = [false, false, false, false, false];
     this.bingoCardBackground = "";
   }
+
   checkIfBingo() {
     for (let k = 0; k <= 5; k++) {
       if (this.alreadyHasLineBingo[k] === false) {
@@ -313,11 +332,9 @@ class App extends Component {
     this.colorMatrix[20] = "bingo-card";
   }
 
-
   createGameBoard = () => {
-    // debugger;
     this.answers[12] = "Bingo";
-    this.matrix[2][2] = 1;
+    this.matrix[centerIndexColumn][centerIndexRow] = wildCard;
     this.gameBoard = this.answers.map((answer, index) => {
       return (
         <div key={index} className='btn btn-default'>
