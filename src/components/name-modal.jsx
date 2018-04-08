@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import {FormControl} from 'react-bootstrap'
-import {OverlayTrigger} from 'react-bootstrap'
 import {Alert} from 'react-bootstrap'
+
 
 
 class NameModal extends Component{
@@ -42,7 +42,7 @@ class NameModal extends Component{
     debugger;
     return (
       <div>
-        <Modal show={this.props.show} onHide={this.handleClose} keyboard='false' backdrop='static' >
+        <Modal show={this.props.show} onHide={this.handleClose} keyboard={false} backdrop='static' >
 
           <Modal.Body>
             <h1>Please choose your name</h1>
