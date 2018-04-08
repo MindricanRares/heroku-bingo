@@ -8,6 +8,13 @@ import ScoreScreen from "./components/score-screen";
 import SubmitScore from "./components/submit-score";
 import Cookies from 'universal-cookie'
 import pickAnswers from "./apputils";
+import { Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import {FormControl} from 'react-bootstrap'
+import {OverlayTrigger} from 'react-bootstrap'
+import {Popover} from 'react-bootstrap'
+import {Tooltip} from 'react-bootstrap'
+import {Alert} from 'react-bootstrap'
 
 class App extends Component {
 
@@ -16,7 +23,10 @@ class App extends Component {
     this.state = {
       totalScore: 0,
       scoreResults: [],
-      numberOfPlayers:0
+      numberOfPlayers:0,
+      show:false,
+      name:"",
+      displayInputMessage:false
     };
     const cookie = new Cookies();
     const lastAnswers = cookie.get('answers')
@@ -354,8 +364,47 @@ class App extends Component {
       )
     }
   }
+  componentDidMount(){
+    this.handleShow();
+  }
+
+
+  displayInputMessage=()=>{
+    if(this.state.displayInputMessage===false){
+      return;
+    }else{
+      return(
+        <Alert bsStyle='danger' onDismiss={this.handleDismiss}>
+          <p>Please use a correct format name</p>
+        </Alert>
+      )
+    }
+  }
+
+  handleClose=()=> {
+    if(this.state.name.length!==0){
+      this.setState({ show: false });
+    }else{
+      this.setState({displayInputMessage:true})
+    }
+  }
+
+  handleShow=()=> {
+    this.setState({ show: true });
+  }
+
+  handleNameChange=(event)=>{
+    this.setState({name:event.target.value})
+  }
 
   render() {
+    const popover = (
+      <Popover id='modal-popover' title='popover'>
+        very popover. such engagement
+      </Popover>
+    );
+    const tooltip = <Tooltip id='modal-tooltip'>wow.</Tooltip>;
+
     return (
       <div>
         <Header />
@@ -376,6 +425,18 @@ class App extends Component {
             {this.displayNumberOfPlayers()}
           </div>
         </div>
+        <Modal show={this.state.show} onHide={this.handleClose} keyboard='false' backdrop='static' >
+
+          <Modal.Body>
+            <h1>Please choose your name</h1>
+            <p>For the moment you can change it only by deleting cookies</p>
+            <FormControl value={this.state.name} onChange={this.handleNameChange} />
+            {this.displayInputMessage()}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleClose}>Choose Name</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }
