@@ -3,12 +3,12 @@ import "./App.css";
 import BingoCard from "./components/bingo-card";
 import ScoreTracker from "./components/score-tracker";
 import Header from "./components/header";
-import { subscribeToResults, submitScore, showNumberOfPlayers } from "./api";
+import { subscribeToResults, submitScore, showNumberOfPlayers, getDefaultAnswers } from "./api";
 import ScoreScreen from "./components/score-screen";
 import SubmitScore from "./components/submit-score";
 import Cookies from 'universal-cookie'
-import pickAnswers from "./apputils";
 import NameModal from "./components/name-modal";
+import NewBingoAnswers from "./components/new-bingo-answer";
 
 const centerIndexColumn=2;
 const centerIndexRow=2;
@@ -26,12 +26,22 @@ class App extends Component {
       scoreResults: [],
       numberOfPlayers:0,
       show:nameCookieResult.modalIsVisible,
-      playerName:nameCookieResult.playerName
+      playerName:nameCookieResult.playerName,
+      defaultAswers:["loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading"]
     };
+    this.answers=this.state.defaultAswers;
+
+    getDefaultAnswers((err, defaultAswers) =>{
+      debugger;
+    this.setState({
+      defaultAswers:defaultAswers
+    });
     this.checkForAnswersCookie();
+  });
     this.subscribeToSocketIo();
     this.intializeScoreMatrixWithZeroes();
     this.settingUpBingoBoard();
+
   }
 
 
@@ -64,7 +74,8 @@ class App extends Component {
     if(lastAnswers){
       this.answers=lastAnswers;
     }else{
-      this.answers = pickAnswers();
+      debugger
+      this.answers = this.state.defaultAswers
       cookie.set('answers',this.answers,{
         path:'/',
         expires:new Date(new Date().getTime() + 120*60000)
@@ -424,6 +435,8 @@ class App extends Component {
           </div>
         </div>
         <NameModal getNameFromModal={this.getNameFromModal} show={this.state.show} />
+
+        <NewBingoAnswers />
       </div>
     );
   }

@@ -39,7 +39,6 @@ class NameModal extends Component{
     this.setState({name:event.target.value})
   }
   render() {
-    debugger;
     return (
       <div>
         <Modal show={this.props.show} onHide={this.handleClose} keyboard={false} backdrop='static' >

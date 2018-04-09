@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-const  socket = io.connect('https://heroku-bingo-server.herokuapp.com/');
+const  socket = io.connect('http://localhost:8000/');
 
 function subscribeToResults(cb) {
   socket.on('results', results => cb(null, results));
@@ -15,4 +15,9 @@ function showNumberOfPlayers(cb) {
   socket.emit('showNumberOfPlayers', 1000);
 }
 
-export { subscribeToResults ,submitScore,showNumberOfPlayers};
+function getDefaultAnswers(cb){
+  socket.emit('request for default answers');
+  socket.on('default answers',defaultAnswers=>cb(null,defaultAnswers));
+}
+
+export { subscribeToResults ,submitScore,showNumberOfPlayers,getDefaultAnswers};
