@@ -26,6 +26,9 @@ class NewBingoAnswers extends Component{
 
   sendNewAnswer=()=>{
     let guidNumber=guid();
+    this.setState({
+      newGUID:guidNumber
+    });
     sendSesionAnswers(guidNumber,this.state.value.split(','))
   }
 
@@ -76,6 +79,7 @@ class NewBingoAnswers extends Component{
         <div className='btn-group btn-matrix'>
           {this.createGameBoard()}
         </div>
+        <p>Your guid is {this.state.newGUID}</p>
       </div>
     );
   }
