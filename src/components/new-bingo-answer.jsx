@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {FormControl,Button} from "react-bootstrap";
 import { sendSesionAnswers, getSessionAnswers } from '../api';
 import BingoCard from './bingo-card';
+import SessionGame from './session-bingo-game';
 
 class NewBingoAnswers extends Component{
   constructor(props, context) {
@@ -35,30 +36,12 @@ class NewBingoAnswers extends Component{
   getNewAnswers=()=>{
     debugger;
     getSessionAnswers(this.state.sessionGUID,(err,sessionAnswers)=>{
-      console.log(sessionAnswers);
+
       this.setState({defaultAswers:sessionAnswers})
+      this.forceUpdate();
+      console.log(this);
     })
   }
-
-  createGameBoard = () => {
-    // this.answers[12] = "Bingo";
-    // this.matrix[centerIndexColumn][centerIndexRow] = wildCard;
-    this.gameBoard = this.state.defaultAswers.map((answer, index) => {
-      return (
-        <div key={index} className='btn btn-default'>
-          <BingoCard
-            backGroundColor={''}
-            index={index}
-            answer={answer}
-            totalScore={this.state.totalScore}
-            addToScore={this.addToScore}
-            removeFromScore={this.removeFromScore}
-          />
-        </div>
-      );
-    });
-    return this.gameBoard;
-  };
   render() {
     return (
       <div>
@@ -76,9 +59,7 @@ class NewBingoAnswers extends Component{
           onChange={this.handleChangeSessionGUID}
         />
         <Button bsStyle='primary'onClick={this.getNewAnswers} > Get answers</Button>
-        <div className='btn-group btn-matrix'>
-          {this.createGameBoard()}
-        </div>
+        <SessionGame answers={this.state.defaultAswers} />
         <p>Your guid is {this.state.newGUID}</p>
       </div>
     );
