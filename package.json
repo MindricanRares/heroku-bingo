@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "npm-run-all -p -s uitest unittest lint",
+    "test": "npm-run-all -p -s lint",
     "uitest": "testcafe firefox  src/tests/*uitest* --app \"npm start\"",
     "unittest": "jest",
     "eject": "react-scripts eject",
