@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-const  socket = io.connect('https://heroku-bingo-server.herokuapp.com/');
+const  socket = io.connect('http://localhost:8001/');
 
 function subscribeToResults(cb) {
   socket.on('results', results => cb(null, results));
@@ -20,4 +20,14 @@ function getDefaultAnswers(cb){
   socket.on('default answers',defaultAnswers=>cb(null,defaultAnswers));
 }
 
-export { subscribeToResults ,submitScore,showNumberOfPlayers,getDefaultAnswers};
+
+function sendSesionAnswers(sessionGUID,sessionAnswers){
+  socket.emit('create session with GUID',sessionGUID,sessionAnswers);
+}
+
+function getSessionAnswers(sessionGUID,cb){
+  socket.emit('request session with GUID',sessionGUID);
+  socket.on('answers for session '+sessionGUID,sessionAnswers=>cb(null,sessionAnswers));
+}
+
+export { subscribeToResults ,submitScore,showNumberOfPlayers,getDefaultAnswers,sendSesionAnswers,getSessionAnswers};

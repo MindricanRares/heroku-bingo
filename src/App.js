@@ -32,7 +32,6 @@ class App extends Component {
     this.answers=this.state.defaultAswers;
 
     getDefaultAnswers((err, defaultAswers) =>{
-      debugger;
     this.setState({
       defaultAswers:defaultAswers
     });
