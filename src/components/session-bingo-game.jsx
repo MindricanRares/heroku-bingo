@@ -2,20 +2,11 @@ import React, { Component } from 'react';
 import "./../App.css";
 import BingoCard from "./bingo-card";
 import ScoreTracker from "./score-tracker";
-import Header from "./header";
-import { subscribeToResults, submitScore, showNumberOfPlayers, getDefaultAnswers } from "./../api";
-import ScoreScreen from "./score-screen";
-import SubmitScore from "./submit-score";
-import Cookies from 'universal-cookie'
-import NameModal from "./name-modal";
-import NewBingoAnswers from "./new-bingo-answer";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 const centerIndexColumn=2;
 const centerIndexRow=2;
 const wildCard=1;
-const cookie = new Cookies();
 
 class SessionGame extends Component{
   constructor(params) {
@@ -23,7 +14,6 @@ class SessionGame extends Component{
     debugger;
     console.log(this);
     this.state = {
-      totalScore: 0,
       totalScore: 0,
       defaultAswers:["loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading"]
     };
@@ -33,9 +23,12 @@ class SessionGame extends Component{
 
   }
   componentWillReceiveProps(nextProps){
+    debugger;
     this.setState({
       defaultAswers:nextProps.answers
     })
+
+    this.forceUpdate();
   }
 
 

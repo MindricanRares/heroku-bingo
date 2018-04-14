@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {FormControl,Button} from "react-bootstrap";
 import { sendSesionAnswers, getSessionAnswers } from '../api';
-import BingoCard from './bingo-card';
 import SessionGame from './session-bingo-game';
 
 class NewBingoAnswers extends Component{
@@ -36,7 +35,6 @@ class NewBingoAnswers extends Component{
   getNewAnswers=()=>{
     debugger;
     getSessionAnswers(this.state.sessionGUID,(err,sessionAnswers)=>{
-
       this.setState({defaultAswers:sessionAnswers})
       this.forceUpdate();
       console.log(this);
