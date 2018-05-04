@@ -11,7 +11,6 @@ const wildCard=1;
 class SessionGame extends Component{
   constructor(params) {
     super(params);
-    debugger;
     console.log(this);
     this.state = {
       totalScore: 0,
@@ -23,7 +22,6 @@ class SessionGame extends Component{
 
   }
   componentWillReceiveProps(nextProps){
-    debugger;
     this.setState({
       defaultAswers:nextProps.answers
     })
@@ -80,7 +78,6 @@ class SessionGame extends Component{
         this.checkForLineBingoLost(k);
       }
     }
-    debugger
 
     for (let k = 0; k <= 5; k++) {
       if (this.alreadyHasColumnBingo[k] === true) {
@@ -295,6 +292,7 @@ class SessionGame extends Component{
 
   createGameBoard = () => {
     this.answers[12] = "Bingo";
+    this.state.defaultAswers[12] = "Bingo";
     this.matrix[centerIndexColumn][centerIndexRow] = wildCard;
     this.gameBoard = this.state.defaultAswers.map((answer, index) => {
       return (
