@@ -4,7 +4,7 @@ import "./../App.css";
 import Preview from './preview';
 import {pickAnswers,guid} from './../apputils'
 import { sendSesionAnswers } from '../api';
-
+import Clipboard from 'react-clipboard.js';
 
 class CreateSession extends Component{
   constructor() {
@@ -13,13 +13,22 @@ class CreateSession extends Component{
       generateKeyMessage:"",
       textAreaValue:"",
       showLivePreview:false,
-      userCards:[]
+      userCards:[],
+      guidNumber:0
     })
   }
 
 
   displayMessage=()=>{
-    return <p>{this.state.generateKeyMessage}</p>;
+    // return <p>{this.state.generateKeyMessage}</p>;
+    if(this.state.generateKeyMessage!=""){
+      return(
+        <Clipboard data-clipboard-text={this.state.guidNumber}  className='btn btn-success'>
+          {this.state.generateKeyMessage}
+        </Clipboard>
+      );
+    }
+
   }
 
   textAreaValidated=()=>{
@@ -45,9 +54,10 @@ class CreateSession extends Component{
 
   generateSession=()=>{
     if(this.textAreaValidated()){
-      let guidNumber=guid();
-      sendSesionAnswers(guidNumber,this.state.textAreaValue.split(','))
-      this.setState({generateKeyMessage:"Session created your key is :"+ guidNumber})
+      this.state.guidNumber=guid();
+      sendSesionAnswers(this.state.guidNumber,this.state.textAreaValue.split(','))
+      this.setState({generateKeyMessage:"Session created your key is : "+ this.state.guidNumber})
+
     }else{
       this.setState({generateKeyMessage:"Invalid text see if respects the rules"})
     }
@@ -173,6 +183,7 @@ class CreateSession extends Component{
           </Row>
         </Grid>
         {this.displayMessage()}
+
       </div>
     );
   }
