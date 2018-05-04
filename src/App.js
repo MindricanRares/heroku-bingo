@@ -4,8 +4,9 @@ import Header from "./components/header";
 import NewBingoAnswers from "./components/new-bingo-answer";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Game from "./components/bingo-game";
-// import {Navbar,Nav,NavItem} from 'react-bootstrap'
+import {Navbar,Nav,NavItem} from 'react-bootstrap'
 import CreateSessions from './components/create-session'
+import EnterSession from "./components/enter-sessions";
 
 class App extends Component {
 
@@ -14,7 +15,7 @@ class App extends Component {
       <Router>
         <div>
           <Header />
-          {/* <Navbar inverse collapseOnSelect>
+          <Navbar inverse collapseOnSelect>
             <Navbar.Header>
               <Navbar.Brand>
                 <Link to='/' >Home </Link>
@@ -24,23 +25,20 @@ class App extends Component {
             <Nav>
 
               <NavItem>
-                <Link to='Sessions' > Sessions(Highly experimental) </Link>
+                <Link to='CreateSessions' > Create Sessions </Link>
               </NavItem>
             </Nav>
             <Nav>
               <NavItem>
-                <Link to='CreateSessions' > CreateSessions </Link>
+                <Link to='EnterSessions' > Enter Sessions </Link>
               </NavItem>
             </Nav>
-          </Navbar> */}
-          <ul>
-            <li> <Link to='/' >Home </Link></li>
-            <li> <Link to='Sessions' > Sessions(Highly experimental) </Link></li>
-            <li><Link to='CreateSessions' > CreateSessions </Link></li>
-          </ul>
+          </Navbar>
+
+
           <Route exact path='/' component={Game} />
-          <Route path='/Sessions' component={NewBingoAnswers} />
           <Route path='/CreateSessions' component={CreateSessions} />
+          <Route path='/EnterSessions' component={EnterSession} />
         </div>
       </Router>
     );
