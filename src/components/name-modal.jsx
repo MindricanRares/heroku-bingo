@@ -44,13 +44,13 @@ class NameModal extends Component{
         <Modal show={this.props.show} onHide={this.handleClose} keyboard={false} backdrop='static' >
 
           <Modal.Body>
-            <h1>Please choose your name</h1>
+            <h1>Please enter your name</h1>
             <p>For the moment you can change it only by deleting cookies</p>
             <FormControl value={this.state.name} onChange={this.handleNameChange} />
             {this.displayInputMessage()}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.handleClose}>Choose Name</Button>
+            <Button onClick={this.handleClose}>Enter Name</Button>
           </Modal.Footer>
         </Modal>
       </div>
