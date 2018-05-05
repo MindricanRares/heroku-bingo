@@ -23,9 +23,11 @@ class CreateSession extends Component{
     // return <p>{this.state.generateKeyMessage}</p>;
     if(this.state.generateKeyMessage!=""){
       return(
-        <Clipboard data-clipboard-text={this.state.guidNumber}  className='btn btn-success'>
-          {this.state.generateKeyMessage}
-        </Clipboard>
+        <div className="clipboard-msg">
+          <Clipboard data-clipboard-text={this.state.guidNumber}  className='btn btn-success'>
+            {this.state.generateKeyMessage}
+          </Clipboard>
+        </div>
       );
     }
 
@@ -179,11 +181,10 @@ class CreateSession extends Component{
             </Col>
             <Col lg={9} >
               {this.displayLivePreview()}
+              {this.displayMessage()}
             </Col>
           </Row>
         </Grid>
-        {this.displayMessage()}
-
       </div>
     );
   }

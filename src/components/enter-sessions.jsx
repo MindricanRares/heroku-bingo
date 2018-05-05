@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FormControl,Button} from "react-bootstrap";
+import {FormControl,Button,Grid,Row} from "react-bootstrap";
 import SessionGame from './session-bingo-game';
 import { sendSesionAnswers, getSessionAnswers } from '../api';
 
@@ -9,7 +9,6 @@ class EnterSession extends Component{
     this.state = {
       sessionGUID:'',
       defaultAswers:["loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading","loading"]
-
     };
   }
 
@@ -26,16 +25,21 @@ class EnterSession extends Component{
 
   render() {
     return (
-      <div>
-        <FormControl
-          type='text'
-          value={this.state.sessionGUID}
-          placeholder='Enter text'
-          onChange={this.handleChangeSessionGUID}
+      <Grid>
+        <Row>
+          <FormControl
+            type='text'
+            value={this.state.sessionGUID}
+            placeholder='Enter text'
+            onChange={this.handleChangeSessionGUID}
           />
-        <Button bsStyle='primary'onClick={this.getNewAnswers} > Get answers</Button>
+        </Row>
+        <br />
+        <Row>
+          <Button bsStyle='primary center-block 'onClick={this.getNewAnswers}   > Get answers</Button>
+        </Row>
         <SessionGame answers={this.state.defaultAswers} />
-      </div>
+      </Grid>
     );
   }
 }
